@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ recipe.title }}</h1>
+        <p>Ready in: {{ recipe.readyInMinutes }} minutes</p>
+        <p>Servings: {{ recipe.servings }}</p>
+
+        <h2>Ingredients:</h2>
+        <ul>
+            {% for ingredient in recipe.extendedIngredients %}
+                <li>{{ ingredient.original }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Instructions:</h2>
+        {% if recipe.analyzedInstructions and recipe.analyzedInstructions[0].steps %}
+            <ol>
+                {% for step in recipe.analyzedInstructions[0].steps %}
+                    <li>{{ step.step }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No instructions available.</p>
+        {% endif %}
+
+        <h2>Utensils:</h2>
+        {% set utensils = [] %}
+        {% if recipe.analyzedInstructions and recipe.analyzedInstructions[0].steps %}
+            {% for step in recipe.analyzedInstructions[0].steps %}
+                {% for equipment in step.equipment %}
+                    {% if equipment.name not in utensils %}
+                        {% set _ = utensils.append(equipment.name) %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% if utensils %}
+            <ul>
+                {% for utensil in utensils %}
+                    <li>{{ utensil }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No utensils required or information not available.</p>
+        {% endif %}
+
+        <p><a href="{{ recipe.sourceUrl }}" target="_blank">Source</a></p>
+        <a href="/">Go Back</a>
+    </div>
+</body>
+</html>

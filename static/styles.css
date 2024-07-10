@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    background-image: "F:\VeeBakes\ai kitchen.jpg";
+    padding: 30px;
+
+}
+
+
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #002390;
+	
+}
+h2 {
+    text-align: center;
+    margin-top: 16px;
+color: #113cc0;
+}
+
+
+
+
+/* Form Styles */
+form {
+    text-align: center;
+    margin: 20px;
+}
+
+input[type="file"] {
+    padding: 19px;
+    border: 2px solid #5b2a2a;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #5b2a2a;
+}
+
+input[type="text"] {
+    padding: 13px;
+    border: 2px solid #5b2a2a;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #5b2a2a;
+}
+
+
+button {
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    outline: 0;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  button:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+    background-color: #138eaa;
+  }
+  
+  @media (min-width: 768px) {
+    .button-37 {
+      padding: 10px 30px;
+    }
+  }
+
+button:hover {
+    background-color: #138eaa; /* Slightly darker pink on hover */
+}
+
+/* Ingredients and Recipes List */
+#ingredients, #recipes {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f0f0; /* Light Pastel Pink */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Recipe Details */
+h2 {
+    color: #4a2c2c; /* A softer brown color */
+}
+
+ul {
+    padding-left: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

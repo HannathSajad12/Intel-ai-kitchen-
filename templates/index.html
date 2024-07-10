@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Identifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to AI Customizable Kitchen</h1>
+        <h2>Upload Images of Ingredients</h2>
+        <label for="ingredientCount">How many ingredients do you wish to upload?</label>
+        <input type="number" id="ingredientCount" name="ingredientCount" min="1" max="10">
+        <button id="generateFieldsButton">Generate Fields</button>
+        
+        <form id="uploadForm" enctype="multipart/form-data" style="display:none;">
+            <div id="fileInputs"></div>
+            <input type="text" name="meat" placeholder="Are there any NON Veg ingredients?">
+            <button type="submit">Upload</button>
+        </form>
+        <div id="ingredients"></div>
+        <div id="recipes"></div>
+    </div>
+
+    <script>
+        document.getElementById('generateFieldsButton').addEventListener('click', function() {
+            const count = document.getElementById('ingredientCount').value;
+            const fileInputsDiv = document.getElementById('fileInputs');
+            fileInputsDiv.innerHTML = ''; // Clear previous inputs
+
+            for (let i = 0; i < count; i++) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.name = 'images';
+                fileInputsDiv.appendChild(input);
+                fileInputsDiv.appendChild(document.createElement('br'));
+            }
+
+            document.getElementById('uploadForm').style.display = 'block';
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const ingredientsDiv = document.getElementById('ingredients');
+                ingredientsDiv.innerHTML = '<h2>Identified Ingredients:</h2><ul>' + data.map(ingredient => `<li>${ingredient}</li>`).join('') + '</ul>';
+                fetchRecipes();
+            });
+        });
+
+        function fetchRecipes() {
+            fetch('/recipes')
+            .then(response => response.json())
+            .then(data => {
+                const recipesDiv = document.getElementById('recipes');
+                if (data.error) {
+                    recipesDiv.innerHTML = `<p class="error">Error fetching recipes: ${data.details}</p>`;
+                } else {
+                    recipesDiv.innerHTML = '<h2>Recipes:</h2>' + data.map(recipe => `
+                        <div>
+                            <h3>${recipe.title}</h3>
+                            <p>Used Ingredients: ${recipe.usedIngredients.map(i => i.name).join(', ')}</p>
+                            <p>Missed Ingredients: ${recipe.missedIngredients.map(i => i.name).join(', ')}</p>
+                            <button onclick="viewRecipeDetails(${recipe.id})">View Details</button>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+
+        function viewRecipeDetails(recipe_id) {
+            window.location.href = `/recipe_details/${recipe_id}`;
+        }
+    </script>
+</body>
+</html>
