@@ -22,11 +22,6 @@ h2 {
     margin-top: 16px;
 color: #113cc0;
 }
-
-
-
-
-/* Form Styles */
 form {
     text-align: center;
     margin: 20px;
@@ -84,10 +79,8 @@ button {
   }
 
 button:hover {
-    background-color: #138eaa; /* Slightly darker pink on hover */
+    background-color: #138eaa; 
 }
-
-/* Ingredients and Recipes List */
 #ingredients, #recipes {
     margin-top: 20px;
 }
@@ -98,16 +91,15 @@ ul {
 }
 
 li {
-    background-color: #f9f0f0; /* Light Pastel Pink */
+    background-color: #f9f0f0;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Recipe Details */
 h2 {
-    color: #4a2c2c; /* A softer brown color */
+    color: #4a2c2c; 
 }
 
 ul {
