@@ -4,3 +4,5 @@
   pip install flask (in your terminal)
 4.--code for installing transformers
   pip install transformers (in your terminal)
+5.Run app.py file 
+-- click open in the pop-up
